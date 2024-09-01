@@ -24,3 +24,21 @@ function getAllRecords()
     $sql = 'SELECT * FROM todos WHERE deleted_at IS NULL';
     return $dbh->query($sql)->fetchAll();
 }
+function getTodoTextById($id)
+{
+    $dbh = connectPdo();
+    $sql = 'SELECT * FROM todos WHERE deleted_at IS NULL AND id = $id';
+    $data = $dbh->query($sql)->fetch();
+    return $data['content'];
+}
+function deleteTodoData($id)
+{
+    $dbh = connectPdo();  
+    $now = date('Y-m-d H:i:s'); 
+
+    // 論理削除を行うSQL文を準備
+    $sql = "UPDATE todos SET deleted_at = '$now' WHERE id = $id";
+
+    // SQL文を実行
+    $dbh->query($sql);
+}
