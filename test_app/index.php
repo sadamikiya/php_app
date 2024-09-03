@@ -1,6 +1,6 @@
-<?php //追記
-require_once('functions.php'); //追記
-?> //追記
+<?php 
+require_once('functions.php'); 
+?> 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -37,7 +37,6 @@ require_once('functions.php'); //追記
           </td>
         </tr>
       <?php endforeach; ?>
-      // ↑ここまで
     </table>
   </div>
 </body>
