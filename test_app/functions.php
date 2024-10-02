@@ -29,5 +29,9 @@ function savePostedData($post)
 function getRefererPath()
 {
     $urlArray = parse_url($_SERVER['HTTP_REFERER']);
+    //var_dump('<pre>');
+    //var_dump($urlArray);
+    //var_dump('</pre>');
+    //exit;
     return $urlArray['path'];
 }
