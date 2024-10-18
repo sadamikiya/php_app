@@ -1,5 +1,7 @@
 <?php 
 require_once('functions.php'); 
+header('Set-Cookie: userId=123');
+setToken(); //追記
 ?> 
 <!DOCTYPE html>
 <html lang="ja">
@@ -9,6 +11,9 @@ require_once('functions.php');
 </head>
 <body>
   welcome hello world
+  <?php if (!empty($_SESSION['err'])): ?> // 追記
+    <p><?= $_SESSION['err']; ?></p> // 追記
+  <?php endif; ?> // 追記
   <div>
      <a href="new.php">
        <p>新規作成</p>
@@ -39,5 +44,6 @@ require_once('functions.php');
       <?php endforeach; ?>
     </table>
   </div>
+  <?php unsetError(); ?> // 追記
 </body>
 </html>

@@ -9,15 +9,17 @@ function connectPdo()
     } catch 
     (PDOException $e) {
         echo $e->getMessage();
-        exit();
+        exit;
     }
 }
 // 新規作成処理
 function createTodoData($todoText)
 {
     $dbh = connectPdo();
-    $sql = 'INSERT INTO todos (content) VALUES ("' . $todoText . '")';
-    $dbh->query($sql);
+    $sql = 'INSERT INTO todos (content) VALUES (:todoText)'; //編集
+    $stmt = $dbh->prepare($sql); //追記
+    $stmt->bindValue(':todoText', $todoText, PDO::PARAM_STR); //追記
+    $stmt->execute(); //追記
 }
 function getAllRecords()
 {
@@ -42,4 +44,14 @@ function deleteTodoData($id)
 
     // SQL文を実行
     $dbh->query($sql);
+}
+
+function updateTodoData($post)
+{
+    $dbh = connectPdo();
+    $sql = 'UPDATE todos SET content = :todoText WHERE id = :id'; //編集
+    $stmt = $dbh->prepare($sql); //編集
+    $stmt->bindValue(':todoText', $post['content'], PDO::PARAM_STR); //編集
+    $stmt->bindValue(':id', (int) $post['id'], PDO::PARAM_INT); //編集
+    $stmt->execute(); //編集
 }

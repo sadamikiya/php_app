@@ -1,3 +1,7 @@
+<?php
+require_once('functions.php');
+setToken(); // 追記
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -5,6 +9,9 @@
   <title>新規作成</title>
 </head>
 <body>
+<?php if (!empty($_SESSION['err'])): ?> // 追記
+    <p><?= $_SESSION['err']; ?></p> // 追記
+  <?php endif; ?> // 追記
   <form action="store.php" method="post">
     <input type="text" name="content">
     <input type="submit" value="作成">
@@ -12,5 +19,6 @@
   <div>
     <a href="index.php">一覧へもどる</a>
   </div>
+  <?php unsetError(); ?> // 追記
 </body>
 </html>
